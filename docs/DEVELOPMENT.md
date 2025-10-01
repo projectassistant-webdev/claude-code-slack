@@ -381,6 +381,22 @@ def format_custom_block(data):
 
 ## Hook Development
 
+### Hook Naming Convention
+
+**Important:** Claude Code expects hook files with specific naming patterns:
+
+- `post-tool-use.py` (with hyphens) - Triggered after tool usage
+- `notification-slack.py` (with hyphens) - General notifications
+- `stop-slack.py` (with hyphens) - Session stop events
+
+Our implementation uses `posttooluse-slack.py` (no hyphens) for internal consistency. The installer automatically creates a symlink `post-tool-use.py -> posttooluse-slack.py` for compatibility.
+
+**If manually installing hooks:**
+```bash
+cd .claude/hooks
+ln -sf posttooluse-slack.py post-tool-use.py
+```
+
 ### Hook Event Data
 
 Each hook receives different JSON structure via stdin:

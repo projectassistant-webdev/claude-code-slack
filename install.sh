@@ -421,6 +421,18 @@ install_hooks() {
         hooks_installed=$((hooks_installed + 1))
     done
 
+    # Create symlink for Claude Code compatibility
+    # Claude Code expects post-tool-use.py (with hyphens) but our file is posttooluse-slack.py
+    local symlink_source="posttooluse-slack.py"
+    local symlink_target="${HOOKS_DIR}/post-tool-use.py"
+
+    if [ -f "${HOOKS_DIR}/$symlink_source" ]; then
+        ln -sf "$symlink_source" "$symlink_target" || {
+            log_warning "Failed to create post-tool-use.py symlink (non-fatal)"
+        }
+        log_debug "Created symlink: post-tool-use.py -> posttooluse-slack.py"
+    fi
+
     log_success "Installed $hooks_installed hook scripts"
     return 0
 }

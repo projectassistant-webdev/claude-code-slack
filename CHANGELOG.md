@@ -5,6 +5,22 @@ All notable changes to the Claude Code Slack Integration will be documented in t
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1] - 2025-10-01
+
+### 🔧 Fixed
+
+- **Hook compatibility with Claude Code** - Added automatic symlink creation for `post-tool-use.py`
+  - Claude Code expects `post-tool-use.py` (with hyphens)
+  - Our implementation uses `posttooluse-slack.py` (no hyphens)
+  - Installer now creates symlink automatically during installation
+  - Fixes issue where tool-use notifications weren't being triggered
+
+### 📚 Documentation
+
+- Added hook naming convention section to DEVELOPMENT.md
+- Documented manual symlink creation for troubleshooting
+- Updated install.sh with inline comments explaining symlink necessity
+
 ## [1.0.0] - 2025-09-29
 
 ### 🎉 Initial Release
